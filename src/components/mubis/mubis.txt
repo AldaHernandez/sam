@@ -1,0 +1,4 @@
+componentes que son relacionados con el módulo mubis o películas, como:
+
+-MovieForm
+-MovieTable

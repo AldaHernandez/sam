@@ -1,0 +1,5 @@
+componentes que se utilizarán bastante en la aplicación, como:
+
+-Botones
+-Modales
+-Rating de MUI, pero personalizado

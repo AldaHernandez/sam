@@ -1,0 +1,5 @@
+componentes que se utilizarán para dar estructura a otros componentes, como:
+
+-Navbar
+-Footer
+-Ver qué otro
