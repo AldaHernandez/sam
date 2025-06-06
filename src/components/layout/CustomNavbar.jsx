@@ -1,11 +1,4 @@
-import {
-  Card,
-  CardBody,
-  Button,
-  Navbar,
-  NavbarBrand,
-  NavbarContent,
-} from "@heroui/react";
+import { Navbar, NavbarContent } from "@heroui/react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -23,7 +16,8 @@ export default function CustomNavbar() {
   return (
     <div>
       <Navbar
-        className={`sticky top-0 left-0 w-full z-50 transition-all duration-300 ${
+        // className={`sticky top-0 left-0 w-full z-50 transition-all duration-300 ${
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
           scrolled
             ? "bg-white/70 backdrop-blur-md shadow-md"
             : "bg-white/10 backdrop-blur-sm"
