@@ -6,17 +6,13 @@ export default function Home() {
   return (
     <div className="flex flex-col mih-h-screen">
       <CustomNavbar />
-      <section className="h-[90vh] flex items-center justify-center px-6">
-        <Card className="bg-blue-500 max-w-3xl w-full h-64 shadow-lg">
-          <CardBody className="flex justify-center">
-            <p className="text-4xl text-white text-justify italic">
-              "You make my days bright as the sun, each moment with you I
-              adore..."
-            </p>
-          </CardBody>
-        </Card>
+      <section className="h-[90vh] bg-[#E7EFC7] flex items-center justify-center px-6">
+        {/* La frase se puede cambiar por otra */}
+        <h2 className="w-[80vw] font-lora text-6xl text-justify italic">
+          "You make my days bright as the sun, each moment with you I adore..."
+        </h2>
       </section>
-      <section className="flex-1 bg-white px-6 py-10">
+      <section className="flex-1 bg-[#AEC8A4] px-6 py-10">
         <h2 className="text-2xl font-bold mb-4 text-center">
           Nuestra historia
         </h2>

@@ -19,7 +19,7 @@ export default function CustomNavbar() {
         // className={`sticky top-0 left-0 w-full z-50 transition-all duration-300 ${
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
           scrolled
-            ? "bg-white/70 backdrop-blur-md shadow-md"
+            ? "bg-[#AEC8A4/90] backdrop-blur-md shadow-md"
             : "bg-white/10 backdrop-blur-sm"
         }`}
       >
