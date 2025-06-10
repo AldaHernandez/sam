@@ -18,18 +18,18 @@ export default function Home() {
   return (
     <div className="flex flex-col mih-h-screen">
       <CustomNavbar />
-      <section className="h-[90vh] bg-[#EAEBD0] flex flex-col items-center justify-center px-6">
+      <section className="h-[90vh] bg-background flex flex-col items-center justify-center px-6">
         {/* La frase se puede cambiar por otra */}
-        <h2 className="w-[80vw] font-lora text-6xl text-[#1C2321] italic">
+        <h2 className="w-[80vw] font-lora text-6xl text-black italic">
           "You make my days bright as the sun, each moment with{" "}
-          <span className="text-[#AF3E3E]">you</span> I adore..."
+          <span className="text-primary">you</span> I adore..."
         </h2>
         <a href="#nosotros">
-          <MoveDown className="w-[42px] h-[42px] mt-20 motion-safe:animate-pulse" />
+          <MoveDown className="text-primary w-[42px] h-[42px] mt-20 motion-safe:animate-pulse" />
         </a>
       </section>
-      <section id="nosotros" className="flex-1 bg-[#DA6C6C] px-6 py-10">
-        <h2 className="text-4xl text-[#1C2321] font-bold mb-4 text-center">
+      <section id="nosotros" className="flex-1 bg-accent px-6 py-10">
+        <h2 className="text-4xl text-black font-bold mb-4 text-center">
           Nuestra historia
           <Timeline>
             <TimelineItem>
@@ -57,7 +57,6 @@ export default function Home() {
             </TimelineItem>
           </Timeline>
         </h2>
-        <p className="text-center text-gray-600"></p>
       </section>
       <Footer />
     </div>

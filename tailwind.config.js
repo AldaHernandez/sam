@@ -10,6 +10,12 @@ export default {
   ],
   theme: {
     extend: {
+      colors: {
+        primary: "#AF3E3E", //rojo fuerte
+        secondary: "#DA6C6C", // rojo suave
+        background: "#EAEBD0", // beige
+        black: "#1C2321", // negro
+      },
       fontFamily: {
         lora: ['"Lora"', 'serif'],
       },
