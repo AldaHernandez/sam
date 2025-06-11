@@ -1,7 +1,5 @@
-import { Card, CardBody } from "@heroui/react";
 import CustomNavbar from "../components/layout/CustomNavbar";
 import Footer from "../components/layout/Footer";
-import { Button } from "@mui/material";
 import {
   Timeline,
   TimelineConnector,
@@ -11,24 +9,41 @@ import {
   TimelineOppositeContent,
   TimelineSeparator,
 } from "@mui/lab";
-import { color } from "framer-motion";
-import { MoveDown } from "lucide-react";
+import { MoveDown, Play } from "lucide-react";
+import Lottie from "lottie-react";
+import animationData from "../assets/sparkles.json";
+import { Button } from "@heroui/react";
 
 export default function Home() {
   return (
     <div className="flex flex-col mih-h-screen">
       <CustomNavbar />
-      <section className="h-[90vh] bg-background flex flex-col items-center justify-center px-6">
-        {/* La frase se puede cambiar por otra */}
-        <h2 className="w-[80vw] font-lora text-6xl text-black italic">
-          "You make my days bright as the sun, each moment with{" "}
-          <span className="text-primary">you</span> I adore..."
-        </h2>
-        <a href="#nosotros">
-          <MoveDown className="text-primary w-[42px] h-[42px] mt-20 motion-safe:animate-pulse" />
-        </a>
+      <section className="relative h-[90vh] bg-background gap-10 flex flex-col items-center justify-center px-6 overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <Lottie
+            animationData={animationData}
+            loop
+            autoplay
+            className="w-full h-full object-cover"
+          />
+        </div>
+        <div className="relative z-10">
+          {/* La frase se puede cambiar por otra */}
+          <h2 className="w-[80vw] font-lora text-6xl text-black italic">
+            "You make my days bright as the sun, each moment with{" "}
+            <span className="text-primary">you</span> I adore..."
+          </h2>
+        </div>
+        <Button
+          color="primary"
+          size="lg"
+          variant="shadow"
+          startContent={<Play />}
+        >
+          Comenzar
+        </Button>
       </section>
-      <section id="nosotros" className="flex-1 bg-accent px-6 py-10">
+      <section id="nosotros" className="flex-1 bg-secondary px-6 py-10">
         <h2 className="text-4xl text-black font-bold mb-4 text-center">
           Nuestra historia
           <Timeline>
