@@ -19,6 +19,7 @@ const theme = createTheme({
     },
     typography: {
         fontFamily: ["Lora", "serif"].join(","),
+        fontFamily: ["Afacad Flux", "sans-serif"].join(","),
     },
 });
 

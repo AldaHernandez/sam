@@ -18,6 +18,7 @@ export default {
       },
       fontFamily: {
         lora: ['"Lora"', 'serif'],
+        afacad: ['Afacad Flux', 'sans-serif']
       },
     },
   },

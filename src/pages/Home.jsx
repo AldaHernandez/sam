@@ -9,7 +9,7 @@ import {
   TimelineOppositeContent,
   TimelineSeparator,
 } from "@mui/lab";
-import { MoveDown, Play } from "lucide-react";
+import { Play } from "lucide-react";
 import Lottie from "lottie-react";
 import animationData from "../assets/sparkles.json";
 import { Button } from "@heroui/react";
@@ -44,34 +44,34 @@ export default function Home() {
         </Button>
       </section>
       <section id="nosotros" className="flex-1 bg-secondary px-6 py-10">
-        <h2 className="text-4xl text-black font-bold mb-4 text-center">
+        <h2 className="text-4xl text-black font-bold font-lora mb-4 text-center">
           Nuestra historia
-          <Timeline>
-            <TimelineItem>
-              <TimelineOppositeContent>
-                <img src="./src/assets/favicon.png" alt="foto" />
-              </TimelineOppositeContent>
-              <TimelineSeparator>
-                <TimelineDot sx={{ bgcolor: "#000" }} />
-                <TimelineConnector sx={{ bgcolor: "#000" }} />
-              </TimelineSeparator>
-              <TimelineContent>Eat</TimelineContent>
-            </TimelineItem>
-            <TimelineItem>
-              <TimelineSeparator>
-                <TimelineDot />
-                <TimelineConnector />
-              </TimelineSeparator>
-              <TimelineContent>Code</TimelineContent>
-            </TimelineItem>
-            <TimelineItem>
-              <TimelineSeparator>
-                <TimelineDot />
-              </TimelineSeparator>
-              <TimelineContent>Sleep</TimelineContent>
-            </TimelineItem>
-          </Timeline>
         </h2>
+        <Timeline>
+          <TimelineItem>
+            <TimelineOppositeContent>
+              <img src="./src/assets/favicon.png" alt="foto" />
+            </TimelineOppositeContent>
+            <TimelineSeparator>
+              <TimelineDot sx={{ bgcolor: "#000" }} />
+              <TimelineConnector sx={{ bgcolor: "#000" }} />
+            </TimelineSeparator>
+            <TimelineContent>Eat</TimelineContent>
+          </TimelineItem>
+          <TimelineItem>
+            <TimelineSeparator>
+              <TimelineDot />
+              <TimelineConnector />
+            </TimelineSeparator>
+            <TimelineContent>Code</TimelineContent>
+          </TimelineItem>
+          <TimelineItem>
+            <TimelineSeparator>
+              <TimelineDot />
+            </TimelineSeparator>
+            <TimelineContent>Sleep</TimelineContent>
+          </TimelineItem>
+        </Timeline>
       </section>
       <Footer />
     </div>
