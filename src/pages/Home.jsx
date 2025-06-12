@@ -13,6 +13,7 @@ import { Play } from "lucide-react";
 import Lottie from "lottie-react";
 import animationData from "../assets/sparkles.json";
 import { Button } from "@heroui/react";
+import { lineHeight } from "@mui/system";
 
 export default function Home() {
   return (
@@ -39,6 +40,7 @@ export default function Home() {
           size="lg"
           variant="shadow"
           startContent={<Play />}
+          className="btn"
         >
           Comenzar
         </Button>
@@ -47,7 +49,7 @@ export default function Home() {
         <h2 className="text-4xl text-black font-bold font-lora mb-4 text-center">
           Nuestra historia
         </h2>
-        <Timeline>
+        <Timeline >
           <TimelineItem>
             <TimelineOppositeContent>
               <img src="./src/assets/favicon.png" alt="foto" />
@@ -56,20 +58,20 @@ export default function Home() {
               <TimelineDot sx={{ bgcolor: "#000" }} />
               <TimelineConnector sx={{ bgcolor: "#000" }} />
             </TimelineSeparator>
-            <TimelineContent>Eat</TimelineContent>
+            <TimelineContent sx={{lineHeight: "1.0"}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer pretium diam vitae vestibulum posuere. Integer vel neque vel orci molestie suscipit sit amet id leo. Aliquam erat volutpat. Ut imperdiet nisl nunc, id tristique nibh imperdiet non. Maecenas lectus nibh, venenatis in egestas sed, porttitor in leo. </TimelineContent> {/*se pone lineheight, pero puede que cambie el contenido por un </p>, entonces, habrá que cambiar este estilo*/}
           </TimelineItem>
           <TimelineItem>
             <TimelineSeparator>
               <TimelineDot />
               <TimelineConnector />
             </TimelineSeparator>
-            <TimelineContent>Code</TimelineContent>
+            <TimelineContent sx={{lineHeight: "1.0"}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer pretium diam vitae vestibulum posuere. Integer vel neque vel orci molestie suscipit sit amet id leo. Aliquam erat volutpat. Ut imperdiet nisl nunc, id tristique nibh imperdiet non. Maecenas lectus nibh, venenatis in egestas sed, porttitor in leo. </TimelineContent>
           </TimelineItem>
           <TimelineItem>
             <TimelineSeparator>
               <TimelineDot />
             </TimelineSeparator>
-            <TimelineContent>Sleep</TimelineContent>
+            <TimelineContent sx={{lineHeight: "1.0"}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer pretium diam vitae vestibulum posuere. Integer vel neque vel orci molestie suscipit sit amet id leo. Aliquam erat volutpat. Ut imperdiet nisl nunc, id tristique nibh imperdiet non. Maecenas lectus nibh, venenatis in egestas sed, porttitor in leo. </TimelineContent>
           </TimelineItem>
         </Timeline>
       </section>

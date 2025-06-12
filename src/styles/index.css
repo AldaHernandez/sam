@@ -9,3 +9,8 @@ body {
     @apply font-afacad;
     font-size: 20px;
 }
+
+.btn {
+    @apply font-afacad;
+    font-size: 20px;
+}
