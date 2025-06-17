@@ -19,7 +19,7 @@ const theme = createTheme({
     },
     typography: {
         fontFamily: ["Afacad Flux", "sans-serif"].join(","),
-        fontSize: 20,
+        fontSize: "20px",
         h1: {
             fontFamily: ["Lora", "serif"].join(","),
         }

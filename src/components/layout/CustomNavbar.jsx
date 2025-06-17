@@ -14,16 +14,14 @@ export default function CustomNavbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
   return (
-    <div>
+    <div className="">
       <Navbar
         // className={`sticky top-0 left-0 w-full z-50 transition-all duration-300 ${
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-          scrolled
-            ? "bg-[#AEC8A4/90] backdrop-blur-md shadow-md"
-            : "bg-white/10 backdrop-blur-sm"
+          scrolled ? "bg-[#EAEBD0/80]" : "bg-white/10 backdrop-blur-sm"
         }`}
       >
-        <NavbarContent className="justify-center!">
+        <NavbarContent className="">
           <Link to="/">inicio</Link>
           <Link to="#">nosotros</Link>
           <Link to="#">música</Link>
