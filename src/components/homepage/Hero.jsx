@@ -16,7 +16,7 @@ export default function Hero() {
         </div>
         <div className="flex flex-col justify-center items-center gap-16 relative z-10 h-3/4 ">
           {/* La frase se puede cambiar por otra */}
-          <h2 className="w-[80vw] text-center font-lora text-4xl/[1.2] sm:text-7xl/[1.2] text-black italic">
+          <h2 className="w-[80vw] text-center font-lora text-5xl/[1.2] sm:text-7xl/[1.2] text-black italic">
             "You make my days bright as the sun,{" "}
             <span className="text-primary underline">
               each moment with you I adore
