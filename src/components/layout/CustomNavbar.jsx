@@ -23,7 +23,7 @@ export default function CustomNavbar() {
       >
         <NavbarContent className="">
           <Link to="/">inicio</Link>
-          <Link to="#">nosotros</Link>
+          <Link to="#nosotros">nosotros</Link>
           <Link to="#">música</Link>
           <Link to="/peliculas">películas</Link>
           <Link to="/lugares">por visitar</Link>
