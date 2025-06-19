@@ -1,4 +1,4 @@
-import { Navbar, NavbarContent } from "@heroui/react";
+import { Navbar, NavbarContent, NavbarItem } from "@heroui/react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -17,16 +17,26 @@ export default function CustomNavbar() {
     <div className="">
       <Navbar
         // className={`sticky top-0 left-0 w-full z-50 transition-all duration-300 ${
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+        className={`items-center fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
           scrolled ? "bg-[#EAEBD0/80]" : "bg-white/10 backdrop-blur-sm"
         }`}
       >
-        <NavbarContent className="">
-          <Link to="/">inicio</Link>
-          <Link to="#nosotros">nosotros</Link>
-          <Link to="#">música</Link>
-          <Link to="/peliculas">películas</Link>
-          <Link to="/lugares">por visitar</Link>
+        <NavbarContent className="items-center justify-center! text-[20px]">
+          <NavbarItem>
+            <Link to="/">inicio</Link>
+          </NavbarItem>
+          <NavbarItem>
+            <Link to="#nosotros">nosotros</Link>
+          </NavbarItem>
+          <NavbarItem>
+            <Link to="#">música</Link>
+          </NavbarItem>
+          <NavbarItem>
+            <Link to="/peliculas">películas</Link>
+          </NavbarItem>
+          <NavbarItem>
+            <Link to="/lugares">por visitar</Link>
+          </NavbarItem>
         </NavbarContent>
       </Navbar>
     </div>

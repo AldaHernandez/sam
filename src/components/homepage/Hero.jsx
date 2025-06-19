@@ -24,7 +24,7 @@ export default function Hero() {
             ..."
           </h2>
           <a className="contents" href="#nosotros">
-            <ChevronsDown className="animate-bounce w-8 h-8 md:w-16 md:h-16" />
+            <ChevronsDown className="animate-bounce w-12 h-12 md:w-16 md:h-16" />
           </a>
         </div>
         {/* Poner animación de mano o flecha hacia abajo */}
