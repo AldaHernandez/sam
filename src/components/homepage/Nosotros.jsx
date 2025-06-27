@@ -28,7 +28,7 @@ export default function Nosotros() {
           </div>
           <div className="w-full md:w-1/2">
             <img
-              src="../../src/assets/nosotros.jpg"
+              src="../../src/assets/nosotres.jpg"
               alt="nosotres"
               className="w-full h-auto object-cover rounded-xl"
             />
