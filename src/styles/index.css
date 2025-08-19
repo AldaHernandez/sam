@@ -6,16 +6,15 @@
 @tailwind utilities;
 
 html {
+  font-size: 20px;
   scroll-behavior: smooth;
 }
 
 body {
-    @apply font-afacad;
-    font-size: 20px;
+    @apply font-afacad text-base;
     /* line-height: 1.0 !important; */
 }
 
 .btn {
-    @apply font-afacad;
-    font-size: 20px;
+    @apply font-afacad text-base;
 }

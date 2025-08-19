@@ -11,7 +11,7 @@ import {
 export default function CustomTimeline() {
   return (
     <div className="flex-1 bg-secondary px-6 py-10">
-      <Timeline>
+      <Timeline className="text-[20px]">
         <TimelineItem>
           <TimelineOppositeContent>
             <img src="./src/assets/favicon.png" alt="foto" />

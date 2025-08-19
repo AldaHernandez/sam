@@ -20,6 +20,9 @@ export default {
         lora: ['"Lora"', 'serif'],
         afacad: ['Afacad Flux', 'sans-serif']
       },
+      fontSize: {
+        base: "20px",
+      }
     },
   },
   darkMode: "class",
