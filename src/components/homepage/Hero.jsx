@@ -1,7 +1,6 @@
 import Lottie from "lottie-react";
 import animationData from "../../assets/sparkles.json";
 import { ChevronsDown } from "lucide-react";
-import { Tooltip } from "@heroui/react";
 
 export default function Hero() {
   return (

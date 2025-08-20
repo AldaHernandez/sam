@@ -8,6 +8,7 @@ export default function AppRouter() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/peliculas" element={<Movies />} />
+        <Route path="/peliculas" element={<Movies />} />
         <Route path="/lugares" element={<Places />} />
       </Routes>
     </BrowserRouter>

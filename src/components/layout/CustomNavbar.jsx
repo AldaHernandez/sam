@@ -37,9 +37,6 @@ export default function CustomNavbar() {
       className={`[&>header]:justify-center items-center fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
         scrolled ? "bg-[#EAEBD0/80]" : "bg-white/10 backdrop-blur-sm"
       }`}
-      // className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-      //   scrolled ? "bg-[#EAEBD0/80]" : "bg-white/10 backdrop-blur-sm"
-      // }`}
       onMenuOpenChange={setIsMenuOpen}
     >
       <NavbarContent className="sm:hidden" justify="end">
