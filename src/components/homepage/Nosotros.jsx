@@ -30,7 +30,8 @@ export default function Nosotros() {
             <img
               src="../../src/assets/nosotres.jpg"
               alt="nosotres"
-              className="w-full h-auto object-cover rounded-xl"
+              className="w-full h-auto  object-cover rounded-xl"
+              loading="lazy"
             />
           </div>
         </CardBody>
