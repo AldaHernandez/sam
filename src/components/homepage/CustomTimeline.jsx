@@ -17,51 +17,102 @@ export default function CustomTimeline() {
       </Typography>
       <Timeline>
         <TimelineItem>
-          <TimelineOppositeContent className="d-flex justify-center">
-            <img
-              className="w-60 xs:w-60 ml-auto rounded-md"
-              src="./src/assets/dia_1_xd.png"
-              alt="dia 1"
-              loading="lazy"
-            />
+          <TimelineOppositeContent className="d-flex">
+            <div className="w-40 h-60 overflow-hidden rounded-md ml-auto">
+              <img
+                className="w-full h-full object-cover"
+                src="./src/assets/timeline/dia_1_xd.png"
+                alt="dia 1"
+                loading="lazy"
+              />
+            </div>
           </TimelineOppositeContent>
           <TimelineSeparator>
-            <TimelineDot sx={{ bgcolor: "#000" }} />
-            <TimelineConnector sx={{ bgcolor: "#000" }} />
+            <TimelineDot className="!bg-black" />
+            <TimelineConnector className="!bg-black" />
           </TimelineSeparator>
           <TimelineContent>
             15/10/2023 <br /> El día que nos conocimos :3 (foto para nada
-            editada)
+            editada) <br /> 📍 Casa del Óscar
           </TimelineContent>
           {/*se pone lineheight, pero puede que cambie el contenido por un </p>, entonces, habrá que cambiar este estilo*/}
         </TimelineItem>
         <TimelineItem>
           <TimelineOppositeContent>
-            02/12/2023 <br /> Nuestra primera cita ☕
+            02/12/2023 <br /> Nuestra primera cita ☕ <br /> 📍 Casa Trópico
           </TimelineOppositeContent>
           <TimelineSeparator>
-            <TimelineDot />
-            <TimelineConnector />
+            <TimelineDot className="!bg-black" />
+            <TimelineConnector className="!bg-black" />
           </TimelineSeparator>
-          <TimelineContent className="d-flex justify-center">
-            <img
-              className="w-48 xs:w-60 mr-auto rounded-md"
-              src="./src/assets/first-date.jpeg"
-              alt="first date"
-              loading="lazy"
-            />
+          <TimelineContent>
+            <div className="w-40 h-60 overflow-hidden rounded-md mr-auto">
+              <img
+                className="w-full h-full object-cover"
+                src="./src/assets/timeline/1st-date.jpeg"
+                alt="first date"
+                loading="lazy"
+              />
+            </div>
           </TimelineContent>
         </TimelineItem>
         <TimelineItem>
+          <TimelineOppositeContent>
+            <div className="w-40 h-50 overflow-hidden rounded-md ml-auto">
+              <img
+                className="w-full h-full object-cover"
+                src="./src/assets/timeline/primera-ida-al-cine.png"
+                alt="primera ida al cine"
+                loading="lazy"
+              />
+            </div>
+          </TimelineOppositeContent>
           <TimelineSeparator>
-            <TimelineDot />
+            <TimelineDot className="!bg-black" />
+            <TimelineConnector className="!bg-black" />
           </TimelineSeparator>
           <TimelineContent>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
-            pretium diam vitae vestibulum posuere. Integer vel neque vel orci
-            molestie suscipit sit amet id leo. Aliquam erat volutpat. Ut
-            imperdiet nisl nunc, id tristique nibh imperdiet non. Maecenas
-            lectus nibh, venenatis in egestas sed, porttitor in leo.{" "}
+            02/01/2024 <br /> Primera ida al cine pa ver Wonka <br /> 📍
+            Cinépolis Las Américas
+          </TimelineContent>
+        </TimelineItem>
+        <TimelineItem>
+          <TimelineOppositeContent>
+            13/01/2024 <br /> Primera foto juntos <br /> 📍 Casa de tus tíos
+          </TimelineOppositeContent>
+          <TimelineSeparator>
+            <TimelineDot className="!bg-black" />
+            <TimelineConnector className="!bg-black" />
+          </TimelineSeparator>
+          <TimelineContent>
+            <div className="w-40 h-60 overflow-hidden rounded-md mr-auto">
+              <img
+                className="w-full h-full object-cover"
+                src="./src/assets/timeline/primera-foto-juntos.jpeg"
+                alt="primera foto juntes"
+                loading="lazy"
+              />
+            </div>
+          </TimelineContent>
+        </TimelineItem>
+        <TimelineItem>
+          <TimelineOppositeContent>
+            <div className="w-40 h-60 overflow-hidden rounded-md ml-auto">
+              <img
+                className="w-full h-full object-cover"
+                src="./src/assets/timeline/salida-awelos-mama.jpeg"
+                alt="conociendo a abuelos y mamá"
+                loading="lazy"
+              />
+            </div>
+          </TimelineOppositeContent>
+          <TimelineSeparator>
+            <TimelineDot className="!bg-black" />
+            <TimelineConnector className="!bg-black" />
+          </TimelineSeparator>
+          <TimelineContent>
+            21/01/2024 <br /> Cuando conociste a mis abuelitos y a mi mamá <br /> 📍
+            Terraza de Colón
           </TimelineContent>
         </TimelineItem>
       </Timeline>
