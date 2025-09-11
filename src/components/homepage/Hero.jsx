@@ -27,7 +27,18 @@ export default function Hero() {
             <ChevronsDown className="animate-bounce w-12 h-12 md:w-16 md:h-16" />
           </a>
         </div>
-        {/* Poner animación de mano o flecha hacia abajo */}
+        <div className="absolute bottom-1 left-0 sm:bottom-6 sm:left-6 z-10 w-full max-w-sm p-2 sm:p-0">
+          <iframe
+            data-testid="embed-iframe"
+            style={{ borderRadius: "12px" }}
+            src="https://open.spotify.com/embed/playlist/4jy22d48FquAaXUmm5KLpa?utm_source=generator&theme=0"
+            width="100%"
+            height="160"
+            allowFullScreen
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy"
+          ></iframe>
+        </div>
       </section>
     </>
   );
