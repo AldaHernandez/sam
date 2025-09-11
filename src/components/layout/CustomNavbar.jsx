@@ -6,8 +6,9 @@ import {
   NavbarMenuItem,
   NavbarMenuToggle,
 } from "@heroui/react";
+import { path } from "framer-motion/client";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { HashLink as Link } from "react-router-hash-link";
 
 export default function CustomNavbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -24,11 +25,11 @@ export default function CustomNavbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const menuItems = [
-    "inicio",
-    "nosotros",
-    "música",
-    "películas",
-    "por visitar",
+    { name: "inicio", path: "/#top" },
+    { name: "nosotros", path: "/#nosotros" },
+    { name: "musica", path: "/#" },
+    { name: "peliculas", path: "/peliculas" },
+    { name: "por visitar", path: "/lugares" },
   ];
 
   return (
@@ -44,32 +45,32 @@ export default function CustomNavbar() {
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
         />
       </NavbarContent>
+
+      {/* Menú Móvil */}
       <NavbarMenu>
         {menuItems.map((item, index) => (
-          <NavbarMenuItem key={`${item}-${index}`}>
-            <Link className="w-full" href="#" size="lg">
-              {item}
+          <NavbarMenuItem key={`${item.name}-${index}`}>
+            <Link
+              className="w-full"
+              to={item.path}
+              size="lg"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              {item.name}
             </Link>
           </NavbarMenuItem>
         ))}
       </NavbarMenu>
 
+      {/* Menú Desktop */}
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        <NavbarItem>
-          <Link to="/">inicio</Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link to="#nosotros">nosotros</Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link to="#">música</Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link to="/peliculas">películas</Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link to="/lugares">por visitar</Link>
-        </NavbarItem>
+        {menuItems.map((item) => (
+          <NavbarItem key={item.path}>
+            <Link to={item.path} smooth>
+              {item.name}
+            </Link>
+          </NavbarItem>
+        ))}
       </NavbarContent>
     </Navbar>
   );
