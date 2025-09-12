@@ -11,8 +11,8 @@ import { Typography } from "@mui/material";
 
 export default function CustomTimeline() {
   return (
-    <div className="flex-1 bg-secondary px-6 py-10">
-      <Typography variant="h4" className="text-center">
+    <div className="flex-1 bg-secondary px-2 sm:px-6 py-10">
+      <Typography variant="h4" className="text-center !font-[600]">
         Nuestra historia
       </Typography>
       <Timeline>
@@ -111,8 +111,8 @@ export default function CustomTimeline() {
             <TimelineConnector className="!bg-black" />
           </TimelineSeparator>
           <TimelineContent>
-            21/01/2024 <br /> Cuando conociste a mis abuelitos y a mi mamá <br /> 📍
-            Terraza de Colón
+            21/01/2024 <br /> Cuando conociste a mis abuelitos y a mi mamá{" "}
+            <br /> 📍 Terraza de Colón
           </TimelineContent>
         </TimelineItem>
       </Timeline>

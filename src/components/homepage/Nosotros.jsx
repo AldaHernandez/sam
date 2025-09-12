@@ -8,7 +8,7 @@ export default function Nosotros() {
     >
       <Card
         isBlurred
-        className="bg-secondary w-full max-w-5xl max-h[90vh] md:max-h-[80vh] overflow-y-auto p-6 rounded-2xl shadow-lg"
+        className="bg-secondary w-full max-w-5xl max-h[90vh] md:max-h-[80vh] overflow-y-auto p-3 sm:p-6 rounded-2xl shadow-lg"
       >
         <CardBody className="flex flex-col md:flex-row gap-6 items-center">
           <div className="flex flex-col w-full md:w-1/2 gap-4">
@@ -26,11 +26,11 @@ export default function Nosotros() {
               Te amo muchísimo🖤
             </h2>
           </div>
-          <div className="w-full md:w-1/2">
+          <div className="w-full md:w-1/2 h-[40vh] md:h-[50vh]">
             <img
-              src="../../src/assets/nosotres.jpg"
+              src="../../src/assets/nosotres-recortada.png"
               alt="nosotres"
-              className="w-full h-auto  object-cover rounded-xl"
+              className="w-full h-full object-cover rounded-xl"
               loading="lazy"
             />
           </div>
