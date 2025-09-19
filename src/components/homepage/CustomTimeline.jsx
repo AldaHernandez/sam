@@ -17,14 +17,12 @@ export default function CustomTimeline() {
         {date}
       </Typography>
       <Typography>{description}</Typography>
-      <Typography variant="caption" color="text.secondary">
-        📍 {location}
-      </Typography>
+      <Typography variant="caption">📍 {location}</Typography>
     </div>
   );
 
   const ImageContent = ({ imageSrc, altText }) => (
-    <div className="py-2 flex items-center justify-center">
+    <div className="py-2 flex items-center justify-end">
       {/* Solución a imágenes responsivas */}
       <div className="w-full max-w-[160px] sm:max-w-[200px] aspect-[3/4] overflow-hidden rounded-lg shadow-lg">
         <img
@@ -36,15 +34,22 @@ export default function CustomTimeline() {
       </div>
     </div>
   );
+
   return (
-    <div className="bg-secondary px-2 sm:px-6 py-10">
-      <Typography variant="h4" className="text-center !font-lora italic">
+    <div className="flex flex-col gap-6 bg-secondary px-2 sm:px-6 py-10">
+      <Typography
+        variant="h4"
+        className="text-center !font-lora !font-[500] italic mb-8"
+      >
         Nuestra historia
       </Typography>
+
+      {/* 'position' es clave para la responsividad en MUI */}
       <Timeline position="alternate">
         {timelineData.map((item, index) => (
           <TimelineItem key={index}>
             <TimelineOppositeContent>
+              {/* Si el índice es par, muestra la imagen a la izquierda, si no, el texto */}
               {index % 2 === 0 ? (
                 <ImageContent imageSrc={item.imageSrc} altText={item.altText} />
               ) : (
@@ -58,6 +63,7 @@ export default function CustomTimeline() {
             </TimelineSeparator>
 
             <TimelineContent>
+              {/* Lógica inversa para el contenido de la derecha */}
               {index % 2 === 0 ? (
                 <TextContent {...item} />
               ) : (
