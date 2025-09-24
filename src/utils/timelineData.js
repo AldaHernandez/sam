@@ -34,5 +34,19 @@ export const timelineData = [
     imageSrc: "./src/assets/timeline/salida-awelos-mama.jpeg",
     altText: "Conociendo a la familia",
   },
+  {
+    date: "24/03/2025",
+    description: "Probando juas",
+    location: "Aquí mero",
+    imageSrc: "./src/assets/favicon.png",
+    altText: "Favicon",
+  },
+  {
+    date: "03/05/2025",
+    description: "idk",
+    location: "Mi casa :0",
+    imageSrc: "./src/assets/nosotres-recortada.png",
+    altText: "Saludos",
+  },
   // ¡Puedes agregar más recuerdos aquí fácilmente!
 ];
