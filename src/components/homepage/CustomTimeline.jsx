@@ -122,7 +122,7 @@ export default function CustomTimeline() {
             const imageInOpposite = (index + 5) % 2 === 0;
 
             return (
-              <Collapse in={showAll} timeout="500" key={index + 5}>
+              <Collapse in={showAll} timeout={400} key={index + 5}>
                 <TimelineItem>
                   <TimelineOppositeContent>
                     {imageInOpposite ? (

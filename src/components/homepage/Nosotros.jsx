@@ -28,7 +28,7 @@ export default function Nosotros() {
           </div>
           <div className="w-full md:w-1/2 h-[40vh] md:h-[50vh]">
             <img
-              src="../../src/assets/nosotres-recortada.png"
+              src="../../src/assets/timeline/cineteca.JPG"
               alt="nosotres"
               className="w-full h-full object-cover rounded-xl"
               loading="lazy"
