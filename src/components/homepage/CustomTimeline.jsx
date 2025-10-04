@@ -23,7 +23,8 @@ import { ChevronDown, ChevronUp, X } from "lucide-react";
 export default function CustomTimeline() {
   const [open, setOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
-  const [showAll, setShowAll] = useState(false);
+  const increment = 5;
+  const [visibleItemsCount, setVisibleItemsCount] = useState(increment);
 
   const handleOpen = (src, alt) => {
     setSelectedImage({ src, alt });
@@ -33,6 +34,18 @@ export default function CustomTimeline() {
   const handleClose = () => {
     setOpen(false);
     setSelectedImage(null);
+  };
+
+  const handleShowMore = () => {
+    setVisibleItemsCount((prevCount) =>
+      Math.max(prevCount + increment, increment)
+    );
+  };
+
+  const handleShowLess = () => {
+    setVisibleItemsCount((prevCount) =>
+      Math.max(prevCount - increment, increment)
+    );
   };
 
   const TextContent = ({ date, description, location }) => (
@@ -67,7 +80,7 @@ export default function CustomTimeline() {
 
   return (
     <>
-      <div className="flex flex-col gap-6 bg-secondary px-2 sm:px-6 py-10">
+      <div className="flex flex-col gap-6 bg-primary text-background px-2 sm:px-6 py-10">
         <Typography
           variant="h4"
           className="text-center !font-lora !font-[500] italic mb-8"
@@ -76,7 +89,7 @@ export default function CustomTimeline() {
         </Typography>
 
         <Timeline>
-          {timelineData.slice(0, 5).map((item, index) => {
+          {timelineData.slice(0, increment).map((item, index) => {
             const imageInOpposite = index % 2 === 0;
 
             return (
@@ -95,9 +108,9 @@ export default function CustomTimeline() {
                 </TimelineOppositeContent>
 
                 <TimelineSeparator>
-                  <TimelineDot className="!bg-black" />
-                  {index < timelineData.length - 1 && (
-                    <TimelineConnector className="!bg-black" />
+                  <TimelineDot className="!bg-background" />
+                  {index < visibleItemsCount - 1 && (
+                    <TimelineConnector className="!bg-background" />
                   )}
                 </TimelineSeparator>
 
@@ -117,62 +130,78 @@ export default function CustomTimeline() {
             );
           })}
 
-          {/* items adicionales con animación */}
-          {timelineData.slice(5).map((item, index) => {
-            const imageInOpposite = (index + 5) % 2 === 0;
+          <Collapse in={visibleItemsCount > increment} timeout={400}>
+            {timelineData
+              .slice(increment, visibleItemsCount)
+              .map((item, index) => {
+                const trueIndex = index + increment;
+                const imageInOpposite = trueIndex % 2 === 0;
 
-            return (
-              <Collapse in={showAll} timeout={400} key={index + 5}>
-                <TimelineItem>
-                  <TimelineOppositeContent>
-                    {imageInOpposite ? (
-                      <ImageContent
-                        imageSrc={item.imageSrc}
-                        altText={item.altText}
-                        side="left"
-                      />
-                    ) : (
-                      <TextContent {...item} />
-                    )}
-                  </TimelineOppositeContent>
+                return (
+                  <TimelineItem key={trueIndex}>
+                    <TimelineOppositeContent>
+                      {/* Si el índice es par, muestra la imagen a la izquierda, si no, el texto */}
+                      {imageInOpposite ? (
+                        <ImageContent
+                          imageSrc={item.imageSrc}
+                          altText={item.altText}
+                          side="left"
+                        />
+                      ) : (
+                        <TextContent {...item} />
+                      )}
+                    </TimelineOppositeContent>
 
-                  <TimelineSeparator>
-                    <TimelineDot className="!bg-black" />
-                    {index + 5 < timelineData.length - 1 && (
-                      <TimelineConnector className="!bg-black" />
-                    )}
-                  </TimelineSeparator>
+                    <TimelineSeparator>
+                      <TimelineDot className="!bg-background" />
+                      {trueIndex < visibleItemsCount - 1 && (
+                        <TimelineConnector className="!bg-background" />
+                      )}
+                    </TimelineSeparator>
 
-                  <TimelineContent>
-                    {imageInOpposite ? (
-                      <TextContent {...item} />
-                    ) : (
-                      <ImageContent
-                        imageSrc={item.imageSrc}
-                        altText={item.altText}
-                        side="right"
-                      />
-                    )}
-                  </TimelineContent>
-                </TimelineItem>
-              </Collapse>
-            );
-          })}
+                    <TimelineContent>
+                      {/* Lógica inversa para el contenido de la derecha */}
+                      {imageInOpposite ? (
+                        <TextContent {...item} />
+                      ) : (
+                        <ImageContent
+                          imageSrc={item.imageSrc}
+                          altText={item.altText}
+                          side="right"
+                        />
+                      )}
+                    </TimelineContent>
+                  </TimelineItem>
+                );
+              })}
+          </Collapse>
         </Timeline>
 
-        {/* 👇 Botón toggle */}
-        {timelineData.length > 5 && (
-          <div className="flex justify-center">
+        {/* Botón toggle */}
+        <div className="flex flex-col md:flex-row justify-center gap-4 mt-4">
+          {/* Botón para mostrar más, solo si aún quedan ítems por mostrar */}
+          {visibleItemsCount < timelineData.length && (
             <Button
               variant="outlined"
-              onClick={() => setShowAll((prev) => !prev)}
-              endIcon={showAll ? <ChevronUp /> : <ChevronDown />}
+              onClick={handleShowMore}
+              endIcon={<ChevronDown />}
               color="black"
             >
-              {showAll ? "Mostrar menos" : "Mostrar más"}
+              Mostrar más
             </Button>
-          </div>
-        )}
+          )}
+          {/* Botón para mostrar menos, solo si hay más de 5 visibles */}
+          {visibleItemsCount > increment && (
+            <Button
+              variant="outlined"
+              onClick={handleShowLess}
+              endIcon={<ChevronUp />}
+              color="black"
+            >
+              Mostrar menos
+            </Button>
+          )}
+        </div>
       </div>
 
       <Dialog
