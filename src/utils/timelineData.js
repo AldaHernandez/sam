@@ -63,17 +63,17 @@ export const timelineData = [
     altText: "CDMX",
   },
   {
-    date: "08/05/2024",
+    date: "26/04/2024",
+    description: "Boda Ana y Antonio",
+    location: "Salón Trabel",
+    imageSrc: "./src/assets/timeline/boda-antonio.jpg",
+    altText: "Boda",
+  },
+  {
+    date: "08/05/2025",
     description: "Primer día con Domi",
     location: "Tu casa",
     imageSrc: "./src/assets/timeline/domi.jpg",
     altText: "Domi",
-  },
-  {
-    date: "08/05/2024",
-    description: "Boda Ana y Antonio",
-    location: "Salón...",
-    imageSrc: "./src/assets/timeline/boda-antonio.jpg",
-    altText: "Boda",
   },
 ];

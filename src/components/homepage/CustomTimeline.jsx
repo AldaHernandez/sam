@@ -109,9 +109,9 @@ export default function CustomTimeline() {
 
                 <TimelineSeparator>
                   <TimelineDot className="!bg-background" />
-                  {index < visibleItemsCount - 1 && (
+                  {index < visibleItemsCount - 1 || visibleItemsCount < timelineData.length ? (
                     <TimelineConnector className="!bg-background" />
-                  )}
+                  ) : null}
                 </TimelineSeparator>
 
                 <TimelineContent>
@@ -130,7 +130,12 @@ export default function CustomTimeline() {
             );
           })}
 
-          <Collapse in={visibleItemsCount > increment} timeout={400}>
+          <Collapse
+            in={visibleItemsCount > increment}
+            timeout={600}
+            unmountOnExit={false}
+            appear={true}
+          >
             {timelineData
               .slice(increment, visibleItemsCount)
               .map((item, index) => {
@@ -154,9 +159,10 @@ export default function CustomTimeline() {
 
                     <TimelineSeparator>
                       <TimelineDot className="!bg-background" />
-                      {trueIndex < visibleItemsCount - 1 && (
+                      {trueIndex < visibleItemsCount - 1 || visibleItemsCount < timelineData.length ? (
                         <TimelineConnector className="!bg-background" />
-                      )}
+                      ) : null}
+
                     </TimelineSeparator>
 
                     <TimelineContent>
@@ -179,17 +185,6 @@ export default function CustomTimeline() {
 
         {/* Botón toggle */}
         <div className="flex flex-col md:flex-row justify-center gap-4 mt-4">
-          {/* Botón para mostrar más, solo si aún quedan ítems por mostrar */}
-          {visibleItemsCount < timelineData.length && (
-            <Button
-              variant="outlined"
-              onClick={handleShowMore}
-              endIcon={<ChevronDown />}
-              color="black"
-            >
-              Mostrar más
-            </Button>
-          )}
           {/* Botón para mostrar menos, solo si hay más de 5 visibles */}
           {visibleItemsCount > increment && (
             <Button
@@ -199,6 +194,17 @@ export default function CustomTimeline() {
               color="black"
             >
               Mostrar menos
+            </Button>
+          )}
+          {/* Botón para mostrar más, solo si aún quedan ítems por mostrar */}
+          {visibleItemsCount < timelineData.length && (
+            <Button
+              variant="outlined"
+              onClick={handleShowMore}
+              endIcon={<ChevronDown />}
+              color="black"
+            >
+              Mostrar más
             </Button>
           )}
         </div>
