@@ -12,7 +12,6 @@ export default function Home() {
       <Hero />
       <Nosotros />
       <CuentaRegresiva />
-      {/* añadir countdown hacia fecha importante aquí */}
       <CustomTimeline />
       <Footer />
     </div>
