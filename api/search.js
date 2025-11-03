@@ -29,7 +29,8 @@ export default async function handler(req, res) {
       year: movie.release_date ? movie.release_date.split('-')[0] : 'N/A',
       posterUrl: movie.poster_path
         ? `https://image.tmdb.org/t/p/w200${movie.poster_path}`
-        : null
+        : null,
+      overview: movie.overview,
     }));
 
     // respuesta para el frontend con el json movies
