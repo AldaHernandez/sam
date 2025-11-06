@@ -13,7 +13,7 @@ export default async function handler(req, res) {
   try {
     // petición a TMDB desde el servidor de Vercel CLI
     const response = await fetch(
-      `https://api.themoviedb.org/3/search/multi?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(query)}&language=es-MX&page=1`
+      `https://api.themoviedb.org/3/search/multi?include_adult=true&api_key=${TMDB_API_KEY}&query=${encodeURIComponent(query)}&language=en-US&page=1`
     );
 
     if (!response.ok) {
@@ -23,8 +23,12 @@ export default async function handler(req, res) {
     const data = await response.json();
 
     // recorriendo cada elemento de data (la respuesta de la api)
-    const items = data.results.map(item => ({
+    const items = data.results
+    // .slice(0, 10) // mostrando solamente los 10 más relevantes
+    .filter(item => item.media_type === 'movie' || item.media_type === 'tv') // filtrando por tipo película o serie 
+    .map(item => ({
       id: item.id,
+      type: item.media_type,
       title: item.title,
       year: item.release_date ? item.release_date.split('-')[0] : 'N/A',
       posterUrl: item.poster_path
@@ -33,7 +37,7 @@ export default async function handler(req, res) {
       overview: item.overview,
     }));
 
-    // respuesta para el frontend con el json movies
+    // respuesta para el frontend con el json items
     res.status(200).json(items);
   } catch (error) {
     res.status(500).json({ error: error.message });

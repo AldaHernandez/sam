@@ -7,11 +7,14 @@ import {
 import { useEffect, useState } from "react";
 
 export default function ContenidoMubis() {
-  const [options, setOptions] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [inputValue, setInputValue] = useState("");
+  // inicializando estados
+  const [options, setOptions] = useState([]); // lo que llenará al autocomplete
+  const [loading, setLoading] = useState(false); // estado de carga al consultar endpoint
+  const [inputValue, setInputValue] = useState(""); // para saber qué se está ingresando en el input
 
+  // acciones a realizar cuando cambie el valor del input
   useEffect(() => {
+    // si no se ingresa nada, se limpian las opciones
     if (inputValue === "") {
       setOptions([]);
       return;
@@ -19,6 +22,7 @@ export default function ContenidoMubis() {
 
     setLoading(true);
 
+    // consulta a la api, se añade debounce de 500ms
     const timerId = setTimeout(() => {
       fetch(`/api/search?q=${encodeURIComponent(inputValue)}`)
         .then((res) => {
@@ -27,6 +31,7 @@ export default function ContenidoMubis() {
           }
           return res.json();
         })
+        // respuesta del backend
         .then((data) => {
           setOptions(data);
           setLoading(false);
@@ -37,48 +42,69 @@ export default function ContenidoMubis() {
           setLoading(false);
         });
     }, 500);
-
+    // si se escribe algo antes de que pasen los 500ms, se reinicia el contador
     return () => clearTimeout(timerId);
   }, [inputValue]);
 
   return (
-    <>
-      <section className="h-[100vh] bg-background pt-[5rem] sm:px-14 px-4">
-        <Stack gap={2}>
-          <h2 className="text-center text-2xl font-semibold">
-            ¡Ingresa el nombre de la serie o película que quieras buscar!
-          </h2>
-          <Autocomplete
-            options={options}
-            loading={loading}
-            getOptionLabel={(option) => option.title || ""}
-            openOnFocus={false}
-            onInputChange={(event, newInputValue) => {
-              setInputValue(newInputValue);
-            }}
-            isOptionEqualToValue={(option, value) => option.id === value.id}
-            noOptionsText="No se encontraron resultados"
-            loadingText="Buscando..."
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                label="Película, serie o persona..."
-                InputProps={{
-                  ...params.InputProps,
-                  endAdornment: (
-                    <>
-                      {loading ? (
-                        <CircularProgress color="inherit" size={20} />
-                      ) : null}
-                      {params.InputProps.endAdornment}
-                    </>
-                  ),
-                }}
-              />
-            )}
-          />
-        </Stack>
-      </section>
-    </>
+    <section className="h-screen bg-background pt-[5rem] sm:px-14 px-4">
+      <Stack gap={2}>
+        <h2 className="text-center text-2xl font-semibold">
+          ¡Ingresa el nombre de la serie o película que quieras buscar!
+        </h2>
+        <Autocomplete
+          options={options}
+          loading={loading}
+          getOptionLabel={(option) => option.title || ""}
+          // openOnFocus={false}
+          onInputChange={(event, newInputValue) => {
+            setInputValue(newInputValue);
+          }}
+          isOptionEqualToValue={(option, value) => option.id === value.id}
+          noOptionsText="No se encontraron resultados"
+          loadingText="Buscando..."
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label="Película o serie..."
+              InputProps={{
+                ...params.InputProps,
+                endAdornment: (
+                  <>
+                    {loading ? (
+                      <CircularProgress color="inherit" size={20} />
+                    ) : null}
+                    {params.InputProps.endAdornment}
+                  </>
+                ),
+              }}
+            />
+          )}
+          renderOption={(props, option) => (
+            <li
+              {...props}
+              key={option.id}
+              className="mt-2 ml-2 flex items-center gap-2 rounded-sm hover:bg-primary hover:cursor-pointer hover:text-background"
+            >
+              {option.posterUrl ? (
+                <img
+                  src={option.posterUrl}
+                  alt={option.title}
+                  className="w-10 h-14 rounded object-cover"
+                />
+              ) : (
+                <div className="w-10 h-14 bg-gray-300 rounded" />
+              )}
+              <div>
+                <div className="font-medium">{option.title}</div>
+                <div className="text-sm">
+                  {option.year} - {option.type === "tv" ? "Serie" : "Película"}
+                </div>
+              </div>
+            </li>
+          )}
+        />
+      </Stack>
+    </section>
   );
 }
