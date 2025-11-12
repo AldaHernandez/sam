@@ -29,8 +29,12 @@ export default async function handler(req, res) {
     .map(item => ({
       id: item.id,
       type: item.media_type,
-      title: item.title,
-      year: item.release_date ? item.release_date.split('-')[0] : 'N/A',
+      title: item.title || item.name, // TMDB utiliza name para las series
+      year: item.release_date 
+      ? item.release_date.split('-')[0] 
+      : item.first_air_date
+        ? item.first_air_date.split('-')[0]
+        : 'N/A', // también utiliza first_air_date para series
       posterUrl: item.poster_path
         ? `https://image.tmdb.org/t/p/w200${item.poster_path}`
         : null,
