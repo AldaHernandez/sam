@@ -5,12 +5,15 @@ import {
   TextField,
 } from "@mui/material";
 import { useEffect, useState } from "react";
+import ModalDetalleMubi from "./ModalDetalleMubi";
 
 export default function ContenidoMubis() {
   // inicializando estados
   const [options, setOptions] = useState([]); // lo que llenará al autocomplete
   const [loading, setLoading] = useState(false); // estado de carga al consultar endpoint
   const [inputValue, setInputValue] = useState(""); // para saber qué se está ingresando en el input
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [openModal, setOpenModal] = useState(false);
 
   // acciones a realizar cuando cambie el valor del input
   useEffect(() => {
@@ -46,6 +49,21 @@ export default function ContenidoMubis() {
     return () => clearTimeout(timerId);
   }, [inputValue]);
 
+  const handleOpenModal = (item) => {
+    setSelectedItem(item);
+    setOpenModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
+    setSelectedItem(null);
+  };
+
+  const addToListaConjunta = (item) => {
+    console.log("Agregando a lista conjunta", item);
+    handleCloseModal();
+  };
+
   return (
     <section className="h-screen bg-background pt-[5rem] sm:px-14 px-4">
       <Stack gap={2}>
@@ -59,6 +77,11 @@ export default function ContenidoMubis() {
           // openOnFocus={false}
           onInputChange={(event, newInputValue) => {
             setInputValue(newInputValue);
+          }}
+          onChange={(event, option) => {
+            if (option) {
+              handleOpenModal(option);
+            }
           }}
           isOptionEqualToValue={(option, value) => option.id === value.id}
           noOptionsText="No se encontraron resultados"
@@ -103,6 +126,12 @@ export default function ContenidoMubis() {
               </div>
             </li>
           )}
+        />
+        <ModalDetalleMubi
+          openModal={openModal}
+          onClose={handleCloseModal}
+          selectedItem={selectedItem}
+          addToListaConjunta={addToListaConjunta}
         />
       </Stack>
     </section>
