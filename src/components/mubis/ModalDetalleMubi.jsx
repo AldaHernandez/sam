@@ -6,9 +6,10 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  Stack,
   Typography,
 } from "@mui/material";
-import { HeartPlus } from "lucide-react";
+import { BookmarkPlus, HeartPlus } from "lucide-react";
 
 export default function ModalDetalleMubi({
   openModal,
@@ -59,15 +60,30 @@ export default function ModalDetalleMubi({
               {selectedItem.overview || "Sin descripción disponible."}
             </Typography>
           </DialogContent>
-          <DialogActions>
-            <Button onClick={onClose} color="secondary">
+          <DialogActions
+            sx={{
+              justifyContent: { xs: "center", md: "flex-end" },
+              flexDirection: { xs: "column", md: "row" },
+              gap: { xs: 1, md: 0 },
+            }}
+          >
+            <Button 
+              onClick={onClose} 
+              variant="outlined"
+              color="secondary"
+              fullWidth={false}
+              sx={{
+                minWidth: { xs: "200px", sm: "auto"},
+                order: { xs: 2, sm: 1}
+              }}
+            >
               Cancelar
             </Button>
             <Button
               onClick={handleAddToLista}
               color="primary"
               variant="contained"
-              startIcon={<HeartPlus />}
+              startIcon={<BookmarkPlus />}
             >
               Agregar a Nuestra Lista
             </Button>

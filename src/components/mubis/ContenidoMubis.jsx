@@ -66,7 +66,7 @@ export default function ContenidoMubis() {
 
   return (
     <section className="h-screen bg-background pt-[5rem] sm:px-14 px-4">
-      <Stack gap={2}>
+      <Stack width={{ xs: "100%", md: "70%" }} m={"auto"} gap={2}>
         <h2 className="text-center text-2xl font-semibold">
           ¡Ingresa el nombre de la serie o película que quieras buscar!
         </h2>
