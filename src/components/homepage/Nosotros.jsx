@@ -19,7 +19,7 @@ export default function Nosotros() {
             </h3>
             <p className="text-justify text-base md:text-md leading-relaxed">
               No encuentro las palabras suficientes para expresar todo lo que
-              has hecho en mí en estos últimos meses, por lo que, decidí plasmar
+              has hecho en mí estos dos años, por lo que, decidí plasmar
               un poco de nosotros en esta página
             </p>
             <h2 className="text-lg md:text-lg font-semibold">
