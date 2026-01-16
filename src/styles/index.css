@@ -12,9 +12,13 @@ html {
 
 body {
     @apply font-afacad text-base;
-    /* line-height: 1.0 !important; */
 }
 
 .btn {
     @apply font-afacad text-base;
+}
+
+/* para hacer responsivo el FlipClockCountdown */
+._qWTcH {
+    flex-wrap: wrap;
 }
