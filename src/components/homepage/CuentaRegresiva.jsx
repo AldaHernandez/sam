@@ -4,7 +4,7 @@ import "@leenguyen/react-flip-clock-countdown/dist/index.css";
 
 export default function CuentaRegresiva() {
   // fecha del evento deseado
-  const anniversaryDate = new Date("2026-01-17T00:00:00").getTime();
+  const anniversaryDate = new Date("2026-10-22T00:00:00").getTime();
 
   return (
     <div style={{
@@ -17,19 +17,18 @@ export default function CuentaRegresiva() {
       <Card 
         className="max-w-lg sm:my-20 my-10 text-center md:mx-0 mx-[1rem] bg-background/50 rounded-2xl shadow-lg backdrop-blur-sm"
         style={{
-          background: 'rgba(255, 255, 255, 0.85)',
-          border: '1px solid rgba(255, 255, 255, 0.2)'
+          background: 'rgba(255, 255, 255, 0.30)',
+          border: '1px solid rgba(255, 255, 255, 0.1)'
         }}
       >
         <CardContent>
-          <Stack gap={4}>
+          <Stack alignItems="center" gap={4}>
             <Typography
               variant="h4"
               className="!font-lora !font-[500] italic text-foreground"
             >
-              Nuestro próximo aniversario
+              Faltan:
             </Typography>
-
             <FlipClockCountdown
               to={anniversaryDate}
               className="justify-center"
@@ -50,12 +49,15 @@ export default function CuentaRegresiva() {
                 borderRadius: 12,
                 boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
               }}
-              // dividerStyle={{ color: "transparent", width: 20 }}
+              dividerStyle={{ color: "transparent", width: 20 }}
               // separatorStyle={{ color: "transparent" }}
             />
-
-            <Typography variant="h6">
-              Increíble lo rápido que pasa el tiempo {"<3"}
+            <Typography variant="h4" className="!font-lora !font-[500] italic text-foreground">
+              ¡¡para el próximo día del vombátido!!
+            </Typography>
+            <img className="w-[10rem] rounded-xl" src="../src/assets/wembet.png" alt="wembet" />
+            <Typography variant="caption">
+              (Save the date)
             </Typography>
           </Stack>
         </CardContent>
