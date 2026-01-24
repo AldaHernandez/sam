@@ -59,9 +59,33 @@ export default function ContenidoMubis() {
     setSelectedItem(null);
   };
 
-  const addToListaConjunta = (item) => {
-    console.log("Agregando a lista conjunta", item);
-    handleCloseModal();
+  const addToListaConjunta = async (item) => {
+    try {
+      const response = await fetch('/api/add-to-list.js', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(item),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        if (response.status === 409) {
+          alert('Esta película/serie ya está en tu lista');
+        } else {
+          throw new Error(data.error || 'Error al agregar');
+        }
+        return;
+      }
+
+      alert('Agregado a la lista (:');
+      handleCloseModal();
+    } catch (error) {
+      console.error('Error', error);
+      alert('Hubo un error al agregar a la lista');
+    }
   };
 
   return (
