@@ -6,10 +6,11 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  IconButton,
   Stack,
   Typography,
 } from "@mui/material";
-import { BookmarkPlus, HeartPlus } from "lucide-react";
+import { BookmarkPlus, Eye, HeartPlus } from "lucide-react";
 
 export default function ModalDetalleMubi({
   openModal,
@@ -21,12 +22,17 @@ export default function ModalDetalleMubi({
     addToListaConjunta(selectedItem);
   };
 
+  const handleAddToWatched = () => {
+    console.log("Ya la viste, wei??");
+  }
+
   return (
     <Dialog
       open={openModal}
       onClose={onClose}
       aria-labelledby="modal-title"
       maxWidth="sm"
+      // disableEscapeKeyDown="false"
       fullWidth
     >
       {selectedItem && (
@@ -37,7 +43,7 @@ export default function ModalDetalleMubi({
             </Typography>
           </DialogTitle>
           <DialogContent>
-            <Box display="flex" gap={2} mb={2}>
+            <Stack flexDirection="row" gap={2} mb={2}>
               {selectedItem.posterUrl && (
                 <img
                   src={selectedItem.posterUrl}
@@ -45,26 +51,44 @@ export default function ModalDetalleMubi({
                   className="w-24 h-36 object-cover rounded"
                 />
               )}
-              <Box>
-                <Typography variant="body1" gutterBottom>
-                  <strong>Año:</strong> {selectedItem.year}
-                </Typography>
-                <Chip
-                  label={selectedItem.type === "tv" ? "Serie" : "Película"}
-                  color={selectedItem.type === "tv" ? "primary" : "secondary"}
-                  size="small"
-                />
-              </Box>
-            </Box>
+              <Stack justifyContent="space-between">
+                <Box>
+                  <Typography variant="body1">
+                    <strong>Año:</strong> {selectedItem.year}
+                  </Typography>
+                  <Chip
+                    label={selectedItem.type === "tv" ? "Serie" : "Película"}
+                    color={selectedItem.type === "tv" ? "primary" : "secondary"}
+                    size="small"
+                  />
+                </Box>
+                <Stack flexDirection="row">
+                  <IconButton 
+                    onClick={handleAddToLista}
+                    color="primary"
+                    variant="contained"
+                  >
+                    <BookmarkPlus />
+                  </IconButton>
+                  <IconButton 
+                    onClick={handleAddToWatched}
+                    color="secondary"
+                    variant="contained"
+                  >
+                    <Eye />
+                  </IconButton>
+                </Stack>
+              </Stack>
+            </Stack>
             <Typography variant="body2" color="textSecondary">
               {selectedItem.overview || "Sin descripción disponible."}
             </Typography>
           </DialogContent>
-          <DialogActions
+          {/* <DialogActions
             sx={{
               justifyContent: { xs: "center", md: "flex-end" },
               flexDirection: { xs: "column", md: "row" },
-              gap: { xs: 1, md: 0 },
+              gap:1,
             }}
           >
             <Button 
@@ -79,15 +103,14 @@ export default function ModalDetalleMubi({
             >
               Cancelar
             </Button>
-            <Button
+            <IconButton 
               onClick={handleAddToLista}
               color="primary"
               variant="contained"
-              startIcon={<BookmarkPlus />}
             >
-              Agregar a Nuestra Lista
-            </Button>
-          </DialogActions>
+              <BookmarkPlus />
+            </IconButton>
+          </DialogActions> */}
         </>
       )}
     </Dialog>

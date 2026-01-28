@@ -79,7 +79,7 @@ export default function ContenidoMubis() {
         }
         return;
       }
-
+      // añadir un snackbar de MUI
       alert('Agregado a la lista (:');
       handleCloseModal();
     } catch (error) {
