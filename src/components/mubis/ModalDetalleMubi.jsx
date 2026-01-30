@@ -10,7 +10,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { BookmarkPlus, Eye, HeartPlus } from "lucide-react";
+import { BookmarkPlus, Eye, HeartPlus, X } from "lucide-react";
 
 export default function ModalDetalleMubi({
   openModal,
@@ -37,18 +37,21 @@ export default function ModalDetalleMubi({
     >
       {selectedItem && (
         <>
-          <DialogTitle id="modal-title">
+          <DialogTitle id="modal-title" sx={{ display:"flex", justifyContent:"space-between", alignItems:"center"}}>
             <Typography variant="h5" component="p">
               {selectedItem.title}
             </Typography>
+            <IconButton aria-label="close" onClick={onClose} sx={{maxWidth:"40px", maxHeight: "40px"}}>
+              <X/>
+            </IconButton>
           </DialogTitle>
           <DialogContent>
-            <Stack flexDirection="row" gap={2} mb={2}>
+            <Stack flexDirection="row" gap={2} mb={2} sx={{ width:"fit-content"}}>
               {selectedItem.posterUrl && (
                 <img
                   src={selectedItem.posterUrl}
                   alt={selectedItem.title}
-                  className="w-24 h-36 object-cover rounded"
+                  className="w-28 h-40 object-cover rounded"
                 />
               )}
               <Stack justifyContent="space-between">
@@ -62,21 +65,30 @@ export default function ModalDetalleMubi({
                     size="small"
                   />
                 </Box>
-                <Stack flexDirection="row">
-                  <IconButton 
+                <Stack flexDirection={{sm:"row", md:"column"}} gap={2}>
+                  <Button 
                     onClick={handleAddToLista}
+                    startIcon={<BookmarkPlus />}
+                    variant="contained"
                     color="primary"
-                    variant="contained"
+                    fullWidth={false}
+                    // sx={{
+                    //   minWidth: { xs: "200px", sm: "auto"},
+                    //   order: { xs: 2, sm: 1}
+                    // }}
                   >
-                    <BookmarkPlus />
-                  </IconButton>
-                  <IconButton 
+                    Añadir a la lista
+                  </Button>
+                  <Button 
                     onClick={handleAddToWatched}
-                    color="secondary"
+                    startIcon={<Eye />}
                     variant="contained"
+                    color="secondary"
+                    fullWidth={false}
+                    // sx={{minWidth: {xs: "200px", sm: "auto"}}}
                   >
-                    <Eye />
-                  </IconButton>
+                    Marcar como vista
+                  </Button>
                 </Stack>
               </Stack>
             </Stack>
@@ -84,33 +96,6 @@ export default function ModalDetalleMubi({
               {selectedItem.overview || "Sin descripción disponible."}
             </Typography>
           </DialogContent>
-          {/* <DialogActions
-            sx={{
-              justifyContent: { xs: "center", md: "flex-end" },
-              flexDirection: { xs: "column", md: "row" },
-              gap:1,
-            }}
-          >
-            <Button 
-              onClick={onClose} 
-              variant="outlined"
-              color="secondary"
-              fullWidth={false}
-              sx={{
-                minWidth: { xs: "200px", sm: "auto"},
-                order: { xs: 2, sm: 1}
-              }}
-            >
-              Cancelar
-            </Button>
-            <IconButton 
-              onClick={handleAddToLista}
-              color="primary"
-              variant="contained"
-            >
-              <BookmarkPlus />
-            </IconButton>
-          </DialogActions> */}
         </>
       )}
     </Dialog>
