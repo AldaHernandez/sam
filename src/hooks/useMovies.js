@@ -145,7 +145,7 @@ export default function useMovies() {
     const removeFromWatchlist = async (itemId) => {
         try {
             const response = await fetch(`/api/remove-from-watchlist/${itemId}`, {
-                method: "DELETE",
+                method: "PUT", // ver qué método utilizar aquí
             });
 
             if (!response.ok) {
@@ -163,7 +163,7 @@ export default function useMovies() {
     const removeFromSeen = async (itemId) => {
         try {
             const response = await fetch(`/api/remove-from-seen/${itemId}`, {
-                method: "DELETE",
+                method: "PUT", // ver qué método utilizar aquí
             });
 
             if (!response.ok) {

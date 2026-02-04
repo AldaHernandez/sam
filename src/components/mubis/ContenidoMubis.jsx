@@ -8,6 +8,7 @@ import {
 import { useEffect, useState } from "react";
 import ModalDetalleMubi from "./ModalDetalleMubi";
 import useMovies from "../../hooks/useMovies";
+import MovieTabs from "./MovieTabs";
 
 export default function ContenidoMubis() {
   // desestructurando hook useMovies
@@ -92,11 +93,22 @@ export default function ContenidoMubis() {
             </li>
           )}
         />
+
+        <MovieTabs
+          watchlist={watchlist}
+          seenMovies={seenMovies}
+          loadingLists={loadingLists}
+          onRemoveFromWatchlist={removeFromWatchlist}
+          onRemoveFromSeen={removeFromSeen}
+          onOpenModal={handleOpenModal} 
+        />
+
         <ModalDetalleMubi
           openModal={openModal}
           onClose={handleCloseModal}
           selectedItem={selectedItem}
-          addToListaConjunta={addToWatchlist}
+          addToWatchlist={addToWatchlist}
+          addToSeen={addToSeen}
         />
       </Stack>
     </section>

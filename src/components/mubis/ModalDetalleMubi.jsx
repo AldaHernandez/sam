@@ -18,17 +18,18 @@ export default function ModalDetalleMubi({
   openModal,
   onClose,
   selectedItem,
-  addToListaConjunta,
+  addToWatchlist,
+  addToSeen
 }) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
-  const handleAddToLista = () => {
-    addToListaConjunta(selectedItem);
+  const handleAddToWatchlist = () => {
+    addToWatchlist(selectedItem);
   };
 
   const handleAddToWatched = () => {
-    alert("Ya la viste, wei??");
+    // addToSeen cuando esté lista
   };
 
   return (
@@ -91,7 +92,7 @@ export default function ModalDetalleMubi({
                     // Botones para móvil
                     <>
                       <IconButton
-                        onClick={handleAddToLista}
+                        onClick={handleAddToWatchlist}
                         color="primary"
                         sx={{
                           bgcolor: "primary.main",
@@ -116,7 +117,7 @@ export default function ModalDetalleMubi({
                   ) : (
                     <>
                       <Button
-                        onClick={handleAddToLista}
+                        onClick={handleAddToWatchlist}
                         startIcon={<BookmarkPlus />}
                         variant="contained"
                         color="primary"
