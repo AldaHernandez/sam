@@ -2,103 +2,43 @@ import {
   Autocomplete,
   CircularProgress,
   Stack,
+  Tabs,
   TextField,
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import ModalDetalleMubi from "./ModalDetalleMubi";
+import useMovies from "../../hooks/useMovies";
 
 export default function ContenidoMubis() {
-  // inicializando estados
-  const [options, setOptions] = useState([]); // lo que llenará al autocomplete
-  const [loading, setLoading] = useState(false); // estado de carga al consultar endpoint
-  const [inputValue, setInputValue] = useState(""); // para saber qué se está ingresando en el input
-  const [selectedItem, setSelectedItem] = useState(null);
-  const [openModal, setOpenModal] = useState(false);
+  // desestructurando hook useMovies
+  const {
+    options,
+    loading,
+    inputValue,
+    setInputValue,
 
-  // acciones a realizar cuando cambie el valor del input
-  useEffect(() => {
-    // si no se ingresa nada, se limpian las opciones
-    if (inputValue === "") {
-      setOptions([]);
-      return;
-    }
+    selectedItem,
+    openModal,
+    handleOpenModal,
+    handleCloseModal,
 
-    setLoading(true);
+    watchlist,
+    seenMovies,
+    loadingLists,
 
-    // consulta a la api, se añade debounce de 500ms
-    const timerId = setTimeout(() => {
-      fetch(`/api/search?q=${encodeURIComponent(inputValue)}`)
-        .then((res) => {
-          if (!res.ok) {
-            throw new Error("Error en la respuesta de la API");
-          }
-          return res.json();
-        })
-        // respuesta del backend
-        .then((data) => {
-          setOptions(data);
-          setLoading(false);
-        })
-        .catch((error) => {
-          console.error("Error al buscar:", error);
-          setOptions([]);
-          setLoading(false);
-        });
-    }, 500);
-    // si se escribe algo antes de que pasen los 500ms, se reinicia el contador
-    return () => clearTimeout(timerId);
-  }, [inputValue]);
-
-  const handleOpenModal = (item) => {
-    setSelectedItem(item);
-    setOpenModal(true);
-  };
-
-  const handleCloseModal = () => {
-    setOpenModal(false);
-    setSelectedItem(null);
-  };
-
-  const addToListaConjunta = async (item) => {
-    try {
-      const response = await fetch('/api/add-to-list.js', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(item),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        if (response.status === 409) {
-          alert('Esta película/serie ya está en tu lista');
-        } else {
-          throw new Error(data.error || 'Error al agregar');
-        }
-        return;
-      }
-      // añadir un snackbar de MUI
-      alert('Agregado a la lista (:');
-      handleCloseModal();
-    } catch (error) {
-      console.error('Error', error);
-      alert('Hubo un error al agregar a la lista');
-    }
-  };
+    addToWatchlist,
+    addToSeen,
+    removeFromWatchlist,
+    removeFromSeen,
+  } = useMovies();
 
   return (
     <section className="h-screen bg-background pt-[5rem] sm:px-14 px-4">
-      <Stack width={{ xs: "100%", md: "70%" }} m={"auto"} gap={2}>
-        <h2 className="text-center text-2xl font-semibold">
-          ¡Ingresa el nombre de la serie o película que quieras buscar!
-        </h2>
+      <Stack alignItems="center" gap={3}>
         <Autocomplete
           options={options}
           loading={loading}
           getOptionLabel={(option) => option.title || ""}
-          // openOnFocus={false}
           onInputChange={(event, newInputValue) => {
             setInputValue(newInputValue);
           }}
@@ -110,10 +50,11 @@ export default function ContenidoMubis() {
           isOptionEqualToValue={(option, value) => option.id === value.id}
           noOptionsText="No se encontraron resultados"
           loadingText="Buscando..."
+          sx={{ width: { xs: "100%", md: "50%" } }}
           renderInput={(params) => (
             <TextField
               {...params}
-              label="Película o serie..."
+              label="Escribe una película o serie..."
               InputProps={{
                 ...params.InputProps,
                 endAdornment: (
@@ -155,7 +96,7 @@ export default function ContenidoMubis() {
           openModal={openModal}
           onClose={handleCloseModal}
           selectedItem={selectedItem}
-          addToListaConjunta={addToListaConjunta}
+          addToListaConjunta={addToWatchlist}
         />
       </Stack>
     </section>

@@ -13,9 +13,9 @@ export default async function handler(req, res) {
   try {
     // petición a TMDB desde el servidor de Vercel CLI
     const response = await fetch(
-      `https://api.themoviedb.org/3/search/multi?include_adult=true&api_key=${TMDB_API_KEY}&query=${encodeURIComponent(query)}&language=en-US&page=1`
+      `https://api.themoviedb.org/3/search/multi?include_adult=true&api_key=${TMDB_API_KEY}&query=${encodeURIComponent(query)}&language=en-US&page=1?append_to_response=vote_average`
     );
-
+  
     if (!response.ok) {
       throw new Error('Fallo al conectar con TMDB');
     }
