@@ -24,7 +24,8 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.6.2",
-    "react-router-hash-link": "^2.4.3"
+    "react-router-hash-link": "^2.4.3",
+    "supabase": "^2.76.4"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",
@@ -38,7 +39,7 @@
     "globals": "^16.0.0",
     "postcss": "^8.5.3",
     "tailwindcss": "^3.4.17",
-    "vercel": "^50.5.0",
+    "vercel": "^50.22.1",
     "vite": "^6.3.5"
   }
 }
