@@ -6,8 +6,8 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const supabaseUrl = process.env.VITE_SUPABASE_URL;
-  const supabaseKey = process.env.VITE_SUPABASE_ANON_KEY;
+  const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+  const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
   if (!supabaseUrl || !supabaseKey) {
     return res.status(500).json({ error: "Supabase not configured" });
@@ -24,7 +24,7 @@ export default async function handler(req, res) {
 
     // supabase insert
     const { data, error } = await supabase
-      .from("watch-list") // table's name
+      .from("watchlist") // table's name
       .insert([
         {
           tmdb_id: id,

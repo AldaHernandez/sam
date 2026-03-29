@@ -29,20 +29,20 @@ export default function useMovies() {
         const timerId = setTimeout(() => {
         fetch(`/api/search?q=${encodeURIComponent(inputValue)}`)
             .then((res) => {
-            if (!res.ok) {
-                throw new Error("Error en la respuesta de la API");
-            }
-            return res.json();
+              if (!res.ok) {
+                  throw new Error("Error en la respuesta de la API");
+              }
+              return res.json();
             })
             // respuesta del backend
             .then((data) => {
-            setOptions(data);
-            setLoading(false);
+              setOptions(data);
+              setLoading(false);
             })
             .catch((error) => {
-            console.error("Error al buscar:", error);
-            setOptions([]);
-            setLoading(false);
+              console.error("Error al buscar:", error);
+              setOptions([]);
+              setLoading(false);
             });
         }, 500);
         // si se escribe algo antes de que pasen los 500ms, se reinicia el contador
@@ -58,14 +58,16 @@ export default function useMovies() {
         setLoadingLists(true);
         try{
             // fetch watchlist
-            const watchlistRes = await fetch ('/api/get-watchlist.js');
+            const watchlistRes = await fetch ('/api/get-watchlist');
             if (watchlistRes.ok) {
                 const watchlistData = await watchlistRes.json();
                 setWatchlist(watchlistData);
+            } else {
+              console.error('Error fetching watchlist', watchlistRes.status);
             }
 
             // fetch seen movies
-            const seenRes = await fetch ('/api/get-seen.js');
+            const seenRes = await fetch ('/api/get-seen');
             if (seenRes.ok) {
                 const seenData = await seenRes.json();
                 setSeenMovies(seenData);
@@ -89,7 +91,7 @@ export default function useMovies() {
 
     const addToWatchlist = async (item) => {
         try {
-            const response = await fetch("/api/add-to-list.js", {
+            const response = await fetch("/api/add-to-list", {
                 method: "POST",
                 headers: {
                 "Content-Type": "application/json",
@@ -119,7 +121,7 @@ export default function useMovies() {
 
     const addToSeen = async (item) => {
         try {
-            const response = await fetch("/api/add-to-seen.js", {
+            const response = await fetch("/api/add-to-seen", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
