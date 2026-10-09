@@ -1,19 +1,11 @@
-import { createClient } from "@supabase/supabase-js";
+// import { createClient } from "@supabase/supabase-js";
+import { supabase } from "../lib/supabase-server.js";
 
 export default async function handler(req, res) {
   //only allow POST requests
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
-
-  const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-  const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
-
-  if (!supabaseUrl || !supabaseKey) {
-    return res.status(500).json({ error: "Supabase not configured" });
-  }
-
-  const supabase = createClient(supabaseUrl, supabaseKey);
 
   try {
     const { id, type, title, year, posterUrl, overview } = req.body;

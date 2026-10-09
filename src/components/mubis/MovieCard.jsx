@@ -1,12 +1,4 @@
-import {
-  Box,
-  Card,
-  CardContent,
-  CardMedia,
-  Chip,
-  IconButton,
-  Typography,
-} from "@mui/material";
+import {Box, Card, CardContent, CardMedia, Chip, IconButton, Typography} from "@mui/material";
 import { Trash2 } from "lucide-react";
 
 export default function MovieCard({
@@ -63,7 +55,7 @@ export default function MovieCard({
           <IconButton
             onClick={(e) => {
               e.stopPropagation(); // Prevent modal from opening
-              onRemove(movie.id);
+              onRemove(movie.dbId);
             }}
             sx={{
               position: "absolute",

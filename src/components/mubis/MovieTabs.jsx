@@ -1,11 +1,4 @@
-import {
-  Box,
-  CircularProgress,
-  Grid,
-  Tab,
-  Tabs,
-  Typography,
-} from "@mui/material";
+import { Box, CircularProgress, Grid, Tab, Tabs, Typography } from "@mui/material";
 import { Bookmark, Eye } from "lucide-react";
 import { useState } from "react";
 import MovieCard from "./MovieCard";

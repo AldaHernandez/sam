@@ -146,12 +146,13 @@ export default function useMovies() {
 
     const removeFromWatchlist = async (itemId) => {
         try {
-            const response = await fetch(`/api/remove-from-watchlist/${itemId}`, {
-                method: "PUT", // ver qué método utilizar aquí
+            const response = await fetch(`/api/remove-from-watchlist?id=${itemId}`, {
+                method: "DELETE", // ver qué método utilizar aquí
             });
 
             if (!response.ok) {
-                throw new Error("Error al eliminar");
+                const { error } = await response.json().catch(() => ({}));
+                throw new Error(error || "Error al eliminar");
             }
 
             alert("Eliminada de la lista");
@@ -182,27 +183,14 @@ export default function useMovies() {
 
     return {
         // search
-        options,
-        loading,
-        inputValue,
-        setInputValue,
-
+        options, loading, inputValue, setInputValue,
         // modal
-        selectedItem,
-        openModal,
-        handleOpenModal,
-        handleCloseModal,
+        selectedItem, openModal, handleOpenModal, handleCloseModal,
 
         // lists
-        watchlist,
-        seenMovies,
-        loadingLists,
-        fetchLists,
+        watchlist, seenMovies, loadingLists, fetchLists,
 
         // actions
-        addToWatchlist,
-        addToSeen,
-        removeFromWatchlist,
-        removeFromSeen,
+        addToWatchlist, addToSeen, removeFromWatchlist, removeFromSeen,
     }
 }
