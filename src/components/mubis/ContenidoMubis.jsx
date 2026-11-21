@@ -2,10 +2,8 @@ import {
   Autocomplete,
   CircularProgress,
   Stack,
-  Tabs,
   TextField,
 } from "@mui/material";
-import { useEffect, useState } from "react";
 import ModalDetalleMubi from "./ModalDetalleMubi";
 import useMovies from "../../hooks/useMovies";
 import MovieTabs from "./MovieTabs";
@@ -15,10 +13,10 @@ export default function ContenidoMubis() {
   const {
     options,
     loading,
-    inputValue,
     setInputValue,
 
     selectedItem,
+    selectedStatus,
     openModal,
     handleOpenModal,
     handleCloseModal,
@@ -27,14 +25,16 @@ export default function ContenidoMubis() {
     seenMovies,
     loadingLists,
 
+    busy,
     addToWatchlist,
     addToSeen,
     removeFromWatchlist,
     removeFromSeen,
+    rateItem,
   } = useMovies();
 
   return (
-    <section className="h-screen bg-background pt-[5rem] sm:px-14 px-4">
+    <section className="min-h-screen bg-background pt-[5rem] pb-12 sm:px-14 px-4">
       <Stack alignItems="center" gap={3}>
         <Autocomplete
           options={options}
@@ -107,8 +107,12 @@ export default function ContenidoMubis() {
           openModal={openModal}
           onClose={handleCloseModal}
           selectedItem={selectedItem}
+          status={selectedStatus}
+          busy={busy}
           addToWatchlist={addToWatchlist}
           addToSeen={addToSeen}
+          removeFromSeen={removeFromSeen}
+          rateItem={rateItem}
         />
       </Stack>
     </section>

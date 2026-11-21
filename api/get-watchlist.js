@@ -1,4 +1,5 @@
 import { supabase } from "../lib/supabase-server.js";
+import { toClientItem } from "../lib/watchlist.js";
 
 export default async function handler(req, res) {
   if (req.method !== "GET") {
@@ -16,17 +17,7 @@ export default async function handler(req, res) {
       return res.status(500).json({ error: "Error al obtener la lista" });
     }
 
-    const transformedData = data.map((item) => ({
-      id: item.tmdb_id,
-      title: item.title,
-      year: item.year,
-      posterUrl: item.poster_url,
-      overview: item.overview,
-      type: item.type,
-      dbId: item.id, // include database id for deletion
-    }));
-
-    return res.status(200).json(transformedData);
+    return res.status(200).json(data.map(toClientItem));
   } catch (error) {
     console.error("Server error:", error.message);
     return res.status(500).json({ error: error.message });

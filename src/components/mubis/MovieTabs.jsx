@@ -1,7 +1,11 @@
-import { Box, CircularProgress, Grid, Tab, Tabs, Typography } from "@mui/material";
-import { Bookmark, Eye } from "lucide-react";
+import { Box, Skeleton, Tab, Tabs, Typography } from "@mui/material";
+import { Bookmark, Eye, Undo2 } from "lucide-react";
 import { useState } from "react";
+import ConfirmDialog from "./ConfirmDialog";
 import MovieCard from "./MovieCard";
+
+const GRID_CLASSES =
+  "grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-5";
 
 function TabPanel({ children, value, index, ...other }) {
   return (
@@ -26,6 +30,17 @@ export default function MovieTabs({
   onOpenModal,
 }) {
   const [activeTab, setActiveTab] = useState(0);
+  // item pending removal from the watchlist (waiting for confirmation)
+  const [pendingRemoval, setPendingRemoval] = useState(null);
+
+  const requestRemoval = (dbId) => {
+    setPendingRemoval(watchlist.find((m) => m.dbId === dbId) ?? null);
+  };
+
+  const confirmRemoval = () => {
+    if (pendingRemoval) onRemoveFromWatchlist(pendingRemoval.dbId);
+    setPendingRemoval(null);
+  };
 
   const handleTabChange = (event, newValue) => {
     setActiveTab(newValue);
@@ -60,9 +75,11 @@ export default function MovieTabs({
       </Tabs>
 
       {loadingLists ? (
-        <Box sx={{ display: "flex", justifyContent: "center", py: 8 }}>
-          <CircularProgress />
-        </Box>
+        <div className={`${GRID_CLASSES} py-6`} aria-busy="true" aria-label="Cargando">
+          {Array.from({ length: 10 }, (_, i) => (
+            <Skeleton key={i} variant="rounded" sx={{ aspectRatio: "2 / 3", height: "auto" }} />
+          ))}
+        </div>
       ) : (
         <>
           {/* Watchlist Tab */}
@@ -81,18 +98,17 @@ export default function MovieTabs({
                 </Typography>
               </Box>
             ) : (
-              <Grid container spacing={3}>
+              <div className={GRID_CLASSES}>
                 {watchlist.map((movie) => (
-                  <Grid item xs={12} sm={6} md={4} lg={3} key={movie.id}>
-                    <MovieCard // componente propio
-                      movie={movie}
-                      onRemove={onRemoveFromWatchlist}
-                      onOpenModal={onOpenModal}
-                      showRemoveButton={true}
-                    />
-                  </Grid>
+                  <MovieCard // componente propio
+                    key={movie.dbId}
+                    movie={movie}
+                    onRemove={requestRemoval}
+                    onOpenModal={onOpenModal}
+                    showRemoveButton={true}
+                  />
                 ))}
-              </Grid>
+              </div>
             )}
           </TabPanel>
 
@@ -109,22 +125,32 @@ export default function MovieTabs({
                 </Typography>
               </Box>
             ) : (
-              <Grid container spacing={3}>
+              <div className={GRID_CLASSES}>
                 {seenMovies.map((movie) => (
-                  <Grid item xs={12} sm={6} md={4} lg={3} key={movie.id}>
-                    <MovieCard
-                      movie={movie}
-                      onRemove={onRemoveFromSeen}
-                      onOpenModal={onOpenModal}
-                      showRemoveButton={true}
-                    />
-                  </Grid>
+                  <MovieCard
+                    key={movie.dbId}
+                    movie={movie}
+                    onRemove={onRemoveFromSeen}
+                    onOpenModal={onOpenModal}
+                    showRemoveButton={true}
+                    removeIcon={<Undo2 size={18} />}
+                    removeLabel="Mover a Por ver"
+                  />
                 ))}
-              </Grid>
+              </div>
             )}
           </TabPanel>
         </>
       )}
+
+      <ConfirmDialog
+        open={Boolean(pendingRemoval)}
+        title="¿Eliminar de la lista?"
+        message={`"${pendingRemoval?.title ?? ""}" se eliminará de tu lista por ver.`}
+        confirmLabel="Eliminar"
+        onConfirm={confirmRemoval}
+        onCancel={() => setPendingRemoval(null)}
+      />
     </Box>
   );
 }

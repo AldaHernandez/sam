@@ -3,34 +3,87 @@ import {
   Button,
   Chip,
   Dialog,
-  DialogActions,
   DialogContent,
   DialogTitle,
   IconButton,
+  Rating,
   Stack,
+  Tooltip,
   Typography,
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import { BookmarkPlus, Eye, HeartPlus, X } from "lucide-react";
+import { BookmarkCheck, BookmarkPlus, Eye, Undo2, X } from "lucide-react";
+import { useEffect, useState } from "react";
 
+// status: "none" (search result not stored) | "watchlist" | "seen"
 export default function ModalDetalleMubi({
   openModal,
   onClose,
   selectedItem,
+  status,
+  busy,
   addToWatchlist,
-  addToSeen
+  addToSeen,
+  removeFromSeen,
+  rateItem,
 }) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
-  const handleAddToWatchlist = () => {
-    addToWatchlist(selectedItem);
+  // For unseen items the rating is only sent along with "Marcar como vista".
+  // For seen items it is saved immediately.
+  const [rating, setRating] = useState(null);
+  useEffect(() => {
+    setRating(selectedItem?.rating ?? null);
+  }, [selectedItem?.dbId, selectedItem?.id, selectedItem?.rating]);
+
+  const isSeen = status === "seen";
+
+  const handleRatingChange = (_event, value) => {
+    setRating(value);
+    if (isSeen) rateItem(selectedItem.dbId, value);
   };
 
-  const handleAddToWatched = () => {
-    // addToSeen cuando esté lista
-  };
+  // only offer the actions that make sense for the item's current state
+  const actions = [];
+  if (status === "none") {
+    actions.push({
+      key: "add",
+      label: "Añadir a la lista",
+      icon: <BookmarkPlus />,
+      color: "primary",
+      onClick: () => addToWatchlist(selectedItem),
+    });
+  }
+  if (status === "watchlist") {
+    actions.push({
+      key: "in-list",
+      label: "En tu lista",
+      icon: <BookmarkCheck />,
+      color: "primary",
+      variant: "outlined",
+      disabled: true,
+    });
+  }
+  if (status !== "seen") {
+    actions.push({
+      key: "seen",
+      label: "Marcar como vista",
+      icon: <Eye />,
+      color: "secondary",
+      onClick: () => addToSeen(selectedItem, rating ?? undefined),
+    });
+  } else {
+    actions.push({
+      key: "unsee",
+      label: "Mover a Por ver",
+      icon: <Undo2 />,
+      color: "secondary",
+      variant: "outlined",
+      onClick: () => removeFromSeen(selectedItem.dbId),
+    });
+  }
 
   return (
     <Dialog
@@ -48,13 +101,14 @@ export default function ModalDetalleMubi({
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
+              gap: 1,
             }}
           >
-            <Typography variant="h5" component="p">
+            <Typography variant="h5" component="span">
               {selectedItem.title}
             </Typography>
             <IconButton
-              aria-label="close"
+              aria-label="Cerrar"
               onClick={onClose}
               sx={{ maxWidth: "40px", maxHeight: "40px" }}
             >
@@ -62,20 +116,15 @@ export default function ModalDetalleMubi({
             </IconButton>
           </DialogTitle>
           <DialogContent>
-            <Stack
-              flexDirection="row"
-              gap={2}
-              mb={2}
-              sx={{ width: "fit-content" }}
-            >
+            <Stack flexDirection="row" gap={2} mb={2}>
               {selectedItem.posterUrl && (
                 <img
                   src={selectedItem.posterUrl}
                   alt={selectedItem.title}
-                  className="w-28 h-40 object-cover rounded"
+                  className="w-28 h-40 object-cover rounded shrink-0"
                 />
               )}
-              <Stack justifyContent="space-between">
+              <Stack justifyContent="space-between" gap={1.5}>
                 <Box>
                   <Chip
                     label={selectedItem.type === "tv" ? "Serie" : "Película"}
@@ -87,59 +136,64 @@ export default function ModalDetalleMubi({
                     <strong>Año:</strong> {selectedItem.year}
                   </Typography>
                 </Box>
-                <Stack flexDirection="row" gap={2}>
-                  {isMobile ? (
-                    // Botones para móvil
-                    <>
-                      <IconButton
-                        onClick={handleAddToWatchlist}
-                        color="primary"
-                        sx={{
-                          bgcolor: "primary.main",
-                          color: "white",
-                          "&:hover": { bgcolor: "primary.dark" },
-                        }}
-                      >
-                        <BookmarkPlus />
-                      </IconButton>
-                      <IconButton
-                        onClick={handleAddToWatched}
-                        color="secondary"
-                        sx={{
-                          bgcolor: "secondary.main",
-                          color: "white",
-                          "&:hover": { bgcolor: "secondary.dark" },
-                        }}
-                      >
-                        <Eye />
-                      </IconButton>
-                    </>
-                  ) : (
-                    <>
-                      <Button
-                        onClick={handleAddToWatchlist}
-                        startIcon={<BookmarkPlus />}
-                        variant="contained"
-                        color="primary"
-                        fullWidth={false}
-                      >
-                        Añadir a la lista
-                      </Button>
-                      <Button
-                        onClick={handleAddToWatched}
-                        startIcon={<Eye />}
-                        variant="contained"
-                        color="secondary"
-                        fullWidth={false}
-                      >
-                        Marcar como vista
-                      </Button>
-                    </>
+                <Box>
+                  <Typography
+                    variant="caption"
+                    color="text.secondary"
+                    component="legend"
+                  >
+                    {isSeen ? "Tu calificación" : "Calificar (opcional)"}
+                  </Typography>
+                  <Rating
+                    name="movie-rating"
+                    value={rating}
+                    precision={0.5}
+                    disabled={busy}
+                    onChange={handleRatingChange}
+                  />
+                </Box>
+                <Stack flexDirection="row" flexWrap="wrap" gap={1.5}>
+                  {actions.map(
+                    ({ key, label, icon, color, variant = "contained", disabled, onClick }) =>
+                      isMobile ? (
+                        <Tooltip key={key} title={label}>
+                          <span>
+                            <IconButton
+                              aria-label={label}
+                              onClick={onClick}
+                              disabled={disabled || busy}
+                              color={color}
+                              sx={
+                                variant === "contained"
+                                  ? {
+                                      bgcolor: `${color}.main`,
+                                      color: "white",
+                                      "&:hover": { bgcolor: `${color}.dark` },
+                                    }
+                                  : { border: 1 }
+                              }
+                            >
+                              {icon}
+                            </IconButton>
+                          </span>
+                        </Tooltip>
+                      ) : (
+                        <Button
+                          key={key}
+                          onClick={onClick}
+                          startIcon={icon}
+                          variant={variant}
+                          color={color}
+                          disabled={disabled || busy}
+                        >
+                          {label}
+                        </Button>
+                      )
                   )}
                 </Stack>
               </Stack>
             </Stack>
-            <Typography variant="body2" color="textSecondary">
+            <Typography variant="body2" color="text.secondary">
               {selectedItem.overview || "Sin descripción disponible."}
             </Typography>
           </DialogContent>

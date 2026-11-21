@@ -74,3 +74,12 @@ This module consists in a page with the layout:
 ├── tailwind.config.js
 └── vite.config.js
 ```
+
+### Database
+Single table `watchlist` (Supabase / Postgres) holds every movie or TV show. `watched` splits the "watchlist" tab from the "already seen" tab, so there is no separate table for seen items.
+
+Columns: `id` (int8, PK), `tmdb_id`, `type`, `title`, `year`, `poster_url`, `overview`, `watched`, `created_at`, plus `rating` and `watched_at` (added by a migration).
+
+The schema's source of truth is `supabase/migrations/`, not this file.
+
+> Never commit to github without asking me, and double check when you'll perform critic changes

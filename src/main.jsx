@@ -5,12 +5,15 @@ import "./styles/index.css";
 import App from "./App.jsx";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./theme.js";
+import ToastProvider from "./components/common/ToastProvider.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <HeroUIProvider>
       <ThemeProvider theme={theme}>
-        <App />
+        <ToastProvider>
+          <App />
+        </ToastProvider>
       </ThemeProvider>
     </HeroUIProvider>
   </StrictMode>
