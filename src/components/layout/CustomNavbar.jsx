@@ -27,8 +27,8 @@ export default function CustomNavbar() {
   const menuItems = [
     { name: "inicio", path: "/#top" },
     { name: "nosotros", path: "/#nosotros" },
-    { name: "musica", path: "/#" },
-    { name: "peliculas", path: "/peliculas" },
+    { name: "música", path: "/#" },
+    { name: "películas", path: "/peliculas" },
     { name: "por visitar", path: "/lugares" },
   ];
 

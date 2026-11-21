@@ -4,7 +4,7 @@ import "@leenguyen/react-flip-clock-countdown/dist/index.css";
 
 export default function CuentaRegresiva() {
   // fecha del evento deseado
-  const anniversaryDate = new Date("2026-10-22T00:00:00").getTime();
+  const anniversaryDate = new Date("2027-01-17T00:00:00").getTime();
 
   return (
     <div style={{
@@ -14,7 +14,7 @@ export default function CuentaRegresiva() {
       background: 'linear-gradient(180deg, #eaebd0 0%, #d4a5a5 50%, #af3e3e 100%)',
       padding: '80px 0'
     }}>
-      <Card 
+      <Card
         className="max-w-lg sm:my-20 my-10 text-center md:mx-0 mx-[1rem] bg-background/50 rounded-2xl shadow-lg backdrop-blur-sm"
         style={{
           background: 'rgba(255, 255, 255, 0.30)',
